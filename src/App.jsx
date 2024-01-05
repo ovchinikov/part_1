@@ -25,7 +25,7 @@ const Content = ({
   );
 };
 
-const Count = ({ exercises1, exercises2, exercises3 }) => {
+const Total = ({ exercises1, exercises2, exercises3 }) => {
   return <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>;
 };
 
@@ -49,7 +49,7 @@ const App = () => {
         exercises2={exercises2}
         exercises3={exercises3}
       />
-      <Count
+      <Total
         exercises1={exercises1}
         exercises2={exercises2}
         exercises3={exercises3}
