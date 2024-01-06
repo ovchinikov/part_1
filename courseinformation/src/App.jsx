@@ -9,14 +9,13 @@ const Part = ({ part }) => {
     </p>
   );
 };
-
 const Content = ({ parts }) => {
   return (
-    <>
-      {parts.map((part) => {
-        return <Part key={part.id} part={part} />;
-      })}
-    </>
+    <div>
+      {parts.map((part) => (
+        <Part key={part.id} part={part} />
+      ))}
+    </div>
   );
 };
 
@@ -33,7 +32,9 @@ const Total = ({ parts }) => {
   return (
     <p>
       Number of exercises{" "}
-      {parts[0].exercises + parts[1].exercises + parts[2].exercises}
+      {parts.reduce((acc, curr) => {
+        return acc + curr.exercises;
+      }, 0)}
     </p>
   );
 };
@@ -43,6 +44,7 @@ const Course = ({ course }) => {
     <>
       <Header course={course.name} />
       <Content parts={course.parts} />
+      <Total parts={course.parts} />
     </>
   );
 };
@@ -71,6 +73,16 @@ const App = () => {
         name: "Debugging React Apps",
         exercises: 10,
         id: 4,
+      },
+      {
+        name: "redux",
+        exercises: 5,
+        id: 5,
+      },
+      {
+        name: "zustand",
+        exercises: 3,
+        id: 6,
       },
     ],
   };
