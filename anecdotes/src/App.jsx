@@ -1,5 +1,9 @@
 import { useState } from "react";
 
+const Button = ({ text, onSmash }) => {
+  return <button onClick={onSmash}>{text}</button>;
+};
+
 const App = () => {
   const anecdotes = [
     "If it hurts, do it more often.",
@@ -13,15 +17,33 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0));
+
+  const handleVotes = () => {
+    const copy = [...votes];
+    copy[selected] += 1;
+    setVotes(copy);
+    console.log(votes);
+  };
+  // use array to store votes
+
   const handleSelected = () => {
     setSelected(Math.floor(Math.random() * anecdotes.length));
   };
 
   return (
-    <div>
-      <button onClick={handleSelected}>next anecdote</button>
-      {anecdotes[selected]}
-    </div>
+    <>
+      <div>{anecdotes[selected]}</div>
+      <div>
+        <Button onSmash={handleSelected} text="next antidote" />
+        <Button onSmash={handleVotes} text="vote" />
+
+        <div>has {votes[selected]} votes</div>
+
+        <h1>Anecdote with most votes</h1>
+        <div>{anecdotes[votes.indexOf(Math.max(...votes))]}</div>
+      </div>
+    </>
   );
 };
 
